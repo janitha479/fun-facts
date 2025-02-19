@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fun Facts</title>
+    <style>
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: #F8F9FA;
+            color: #343A40;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .container {
+            text-align: center;
+        }
+
+        button {
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            margin: 10px;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        .fact {
+            margin: 20px 0;
+            font-size: 1.5em;
+            opacity: 0;
+            transition: opacity 0.5s ease;
+        }
+
+        .show {
+            opacity: 1;
+        }
+
+        .share-button {
+            background-color: #1DA1F2;
+        }
+
+        .share-button:hover {
+            background-color: #0d95e8;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Fun Facts</h1>
+        <button id="factButton">Show Random Fact</button>
+        <div id="factDisplay" class="fact"></div>
+        <button id="shareButton" class="share-button" style="display:none;">Share on Twitter</button>
+    </div>
+    <script>
+        const facts = [
+            "Bananas are berries, but strawberries aren't.",
+            "Honey never spoils.",
+            "A group of flamingos is called a 'flamboyance'.",
+            "Octopuses have three hearts.",
+            "Wombat poop is cube-shaped.",
+            "A jiffy is an actual unit of time: 1/100th of a second.",
+            "Cows have best friends and get stressed when they are separated.",
+            "The inventor of the frisbee was turned into a frisbee after he died."
+        ];
+
+        const factButton = document.getElementById('factButton');
+        const factDisplay = document.getElementById('factDisplay');
+        const shareButton = document.getElementById('shareButton');
+
+        factButton.addEventListener('click', () => {
+            const randomIndex = Math.floor(Math.random() * facts.length);
+            const randomFact = facts[randomIndex];
+            
+            factDisplay.textContent = randomFact;
+            factDisplay.classList.add('show');
+            
+            // Show the share button
+            shareButton.style.display = 'inline-block';
+            
+            // Set up the share button
+            shareButton.onclick = () => {
+                const twitterUrl = `https://twitter.com/intent/tweet?text=${encodeURIComponent(randomFact)}`;
+                window.open(twitterUrl, '_blank');
+            };
+            
+            // Fade in effect
+            setTimeout(() => {
+                factDisplay.classList.remove('show');
+            }, 5000); // Fact will fade out after 5 seconds
+        });
+    </script>
+</body>
+</html>
